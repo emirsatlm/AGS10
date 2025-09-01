@@ -1,0 +1,7 @@
+../Core/Src/AGS10.c:8:9:ags10_crc8	32	static
+../Core/Src/AGS10.c:21:6:ags10_init	24	static
+../Core/Src/AGS10.c:27:6:ags10_read_register	40	static
+../Core/Src/AGS10.c:50:6:ags10_get_firmware_version	16	static
+../Core/Src/AGS10.c:54:6:ags10_get_gas_resistance	16	static
+../Core/Src/AGS10.c:63:6:ags10_get_tvoc	16	static
+../Core/Src/AGS10.c:72:6:ags10_set_address	32	static
