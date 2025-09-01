@@ -4,6 +4,11 @@
 
 driver for the AGS10 gas sensor using I2C on STM32F1. Supports gas resistance and TVOC readings with CRC validation and polling.
 
+## Files
+* gas_Sensor
+includes example for stm32f103c8t6
+* Platform_agnostic
+to adapt other enviroments
 ## Features
 
 * Read gas resistance (Ohms)
