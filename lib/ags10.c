@@ -15,30 +15,30 @@
 * Public Function Definitions
  ******************************************************************************/
 
-bool ags10_init(AGS10MA_HandleTypeDef *p_sensor,
+bool ags10_init(AGS10MA_HandleTypeDef *ph_sensor,
                 ags10ma_platform_i2c_t *p_platform,
                 uint8_t i2c_addr)
 {
-    if ((NULL == p_platform) || (NULL == p_sensor))
+    if ((NULL == p_platform) || (NULL == ph_sensor))
     {
         return false;
     }
 
-    p_sensor->platform = p_platform;
-    p_sensor->i2c_addr = i2c_addr;
+    ph_sensor->platform = p_platform;
+    ph_sensor->i2c_addr = i2c_addr;
 
     return true;
 }
 
-bool ags10_register_read(AGS10MA_HandleTypeDef *p_sensor, 
+bool ags10_register_read(AGS10MA_HandleTypeDef *ph_sensor, 
                          uint8_t reg,
                          uint16_t delayms,
                          uint32_t *p_value)
 {
     // Send register address // todo: remove comments, code should be self-explanatory
     bool register_addr_send_status = 
-        p_sensor->platform->i2c_transmit(p_sensor->platform->handle,
-                                         AGS10MA_I2C_DEFAULT_ADDR, 
+        ph_sensor->platform->i2c_transmit(ph_sensor->platform->handle,
+                                         AGS10MA_I2C_DEVICE_ADDR, 
                                          &reg, 
                                          1, 
                                          1000);
@@ -49,13 +49,13 @@ bool ags10_register_read(AGS10MA_HandleTypeDef *p_sensor,
     }
 
     // Delay
-    p_sensor->platform->delay_ms(delayms);
+    ph_sensor->platform->delay_ms(delayms);
 
     #define READ_BYTE_CNT 5
     uint8_t buff[READ_BYTE_CNT] = {0U};
 
     // Receive 5 bytes (4 data + 1 CRC)
-    if (!p_sensor->platform->i2c_receive(p_sensor->platform->handle,
+    if (!ph_sensor->platform->i2c_receive(ph_sensor->platform->handle,
                                          AGS10MA_READ_REG_ADDR,
                                          buff,
                                          READ_BYTE_CNT,
@@ -79,16 +79,16 @@ bool ags10_register_read(AGS10MA_HandleTypeDef *p_sensor,
     return true;
 }
 
-bool ags10_firmware_version_get(AGS10MA_HandleTypeDef *p_sensor,
+bool ags10_firmware_version_get(AGS10MA_HandleTypeDef *ph_sensor,
                                 uint32_t *p_version)
 {
-    return ags10_register_read(p_sensor, AGS10MA_VERSION_REG, 30, p_version);
+    return ags10_register_read(ph_sensor, AGS10MA_VERSION_REG, 30, p_version);
 }
 
-bool ags10_gas_resistance_get(AGS10MA_HandleTypeDef *p_sensor,
+bool ags10_gas_resistance_get(AGS10MA_HandleTypeDef *ph_sensor,
                               uint32_t *p_resistance)
 {
-    if (false == ags10_register_read(p_sensor,
+    if (false == ags10_register_read(ph_sensor,
                                      AGS10MA_GAS_RES_REG,
                                      1000,
                                      p_resistance))
@@ -105,9 +105,9 @@ bool ags10_gas_resistance_get(AGS10MA_HandleTypeDef *p_sensor,
     return true;
 }
 
-bool ags10_tvoc_get(AGS10MA_HandleTypeDef *p_sensor, uint32_t *p_tvoc)
+bool ags10_tvoc_get(AGS10MA_HandleTypeDef *ph_sensor, uint32_t *p_tvoc)
 {
-    if (false == ags10_register_read(p_sensor,
+    if (false == ags10_register_read(ph_sensor,
                                      AGS10MA_TVOC_STAT_REG,
                                      1000,
                                      p_tvoc))
@@ -124,7 +124,7 @@ bool ags10_tvoc_get(AGS10MA_HandleTypeDef *p_sensor, uint32_t *p_tvoc)
     return true;
 }
 
-bool ags10_address_set(AGS10MA_HandleTypeDef *p_sensor, uint8_t new_addr)
+bool ags10_address_set(AGS10MA_HandleTypeDef *ph_sensor, uint8_t new_addr)
 {
     uint8_t buf[6] = {
         
@@ -136,7 +136,7 @@ bool ags10_address_set(AGS10MA_HandleTypeDef *p_sensor, uint8_t new_addr)
         0x00,
     };
 
-    if (!p_sensor->platform->i2c_transmit(p_sensor->platform->handle,
+    if (!ph_sensor->platform->i2c_transmit(ph_sensor->platform->handle,
                                           AGS10MA_WRITE_REG_ADDR,
                                           buf,
                                           6,
@@ -145,7 +145,7 @@ bool ags10_address_set(AGS10MA_HandleTypeDef *p_sensor, uint8_t new_addr)
         return false;
     }
 
-    p_sensor->i2c_addr = new_addr;
+    ph_sensor->i2c_addr = new_addr;
 
     return true;
 }
