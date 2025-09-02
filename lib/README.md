@@ -24,7 +24,7 @@ Add `ags10_gas_sensor.h` and `ags10_gas_sensor.c` to your project. Include the h
 ```
 
 ### 2. Define Platform-Specific Functions
-The library uses a platform-agnostic interface (`AGS10MA_PlatformI2C`) for I2C communication and delays. You must provide implementations for the following functions:
+The library uses a platform-agnostic interface (`ags10ma_platform_i2c_t`) for I2C communication and delays. You must provide implementations for the following functions:
 - `bool i2c_transmit(void *handle, uint8_t addr, const uint8_t *data, uint16_t len, uint32_t timeout_ms)`: Sends data over I2C.
 - `bool i2c_receive(void *handle, uint8_t addr, uint8_t *data, uint16_t len, uint32_t timeout_ms)`: Receives data over I2C.
 - `void delay_ms(uint32_t ms)`: Delays execution for the specified milliseconds.
@@ -60,7 +60,7 @@ Set up the platform interface and initialize the sensor in your application code
 
 int main(void) {
     // Define platform-specific interface
-    AGS10MA_PlatformI2C platform = {
+    ags10ma_platform_i2c_t platform = {
         .i2c_transmit = stm32_i2c_transmit, // Replace with your transmit function
         .i2c_receive = stm32_i2c_receive,   // Replace with your receive function
         .delay_ms = stm32_delay_ms,         // Replace with your delay function
