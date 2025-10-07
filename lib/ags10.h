@@ -28,6 +28,7 @@
 #define AGS10MA_VERSION_REG        0x11
 #define AGS10MA_GAS_RES_REG        0x20
 #define AGS10MA_SET_ADDR_REG       0x21
+#define AGS10MA_DATA_LEN           4U
 
 /*******************************************************************************
 * Structs

@@ -1,9 +1,9 @@
 // todo: use doxgen style brief
 /**
  * @file ags10.c
- * @author your name (you@domain.com)
+ * @author emirsatlm (emir@satlm.dev)
  * @brief 
- * @version 0.1
+ * @version 0.2
  * @date 2025-09-01
  * 
  * @copyright Copyright (c) 2025
@@ -35,7 +35,6 @@ bool ags10_register_read(AGS10MA_HandleTypeDef *ph_sensor,
                          uint16_t delayms,
                          uint32_t *p_value)
 {
-    // Send register address // todo: remove comments, code should be self-explanatory
     bool register_addr_send_status = 
         ph_sensor->platform->i2c_transmit(ph_sensor->platform->handle,
                                          AGS10MA_I2C_DEVICE_ADDR, 
@@ -48,13 +47,13 @@ bool ags10_register_read(AGS10MA_HandleTypeDef *ph_sensor,
         return false;
     }
 
-    // Delay
+   
     ph_sensor->platform->delay_ms(delayms);
 
     #define READ_BYTE_CNT 5
     uint8_t buff[READ_BYTE_CNT] = {0U};
 
-    // Receive 5 bytes (4 data + 1 CRC)
+    
     if (!ph_sensor->platform->i2c_receive(ph_sensor->platform->handle,
                                          AGS10MA_READ_REG_ADDR,
                                          buff,
@@ -65,10 +64,9 @@ bool ags10_register_read(AGS10MA_HandleTypeDef *ph_sensor,
     }
     #undef READ_BYTE_CNT
 
-    // Verify CRC
-    if (ags10_crc8(buff, 4) != buff[4]) // todo: why this is 4, remove all magic numbers, define macros
+    if (ags10_crc8(buff, AGS10MA_DATA_LEN) != buff[AGS10MA_DATA_LEN]) 
     {
-        return false; // CRC mismatch
+        return false; 
     }
 
     *p_value = ((uint32_t)buff[0] << 24) | 
@@ -167,5 +165,4 @@ uint8_t ags10_crc8(const uint8_t *p_data, int len)
 
     return crc;
 }
-
 // eof
