@@ -27,7 +27,7 @@
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
 HAL_StatusTypeDef status;
-AGS10_HandleTypeDef ags_sensor;
+AGS10_HandleTypeDef ags10;
 /* USER CODE END PTD */
 
 /* Private define ------------------------------------------------------------*/
@@ -56,7 +56,11 @@ void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_I2C2_Init(void);
 /* USER CODE BEGIN PFP */
-
+bool AGS10_IO_Write(uint8_t addr, uint8_t *pData, uint16_t length);
+bool AGS10_IO_Read(uint8_t addr, uint8_t *pData, uint16_t length);
+bool AGS10_IO_Read(uint8_t addr, uint8_t *pData, uint16_t length);
+void AGS10_IO_Delay(uint16_t ms);
+void app_init(void);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -82,18 +86,7 @@ int main(void)
 	HAL_Init();
 
   /* USER CODE BEGIN Init */
-  if (ags10_init(&ags_sensor, &hi2c2, AGS10_I2C_ADDR_DEFAULT)) {
-          sensor_initialized = 1;
-      } else {
-          sensor_initialized = 0;
-          while (1); // Halt execution if sensor init fails
-      }
 
-      if (ags10_get_firmware_version(&ags_sensor, &firmware_version)) {
-          sensor_initialized = 2;  // Mark as fully initialized
-      } else {
-          //while (1); // Halt if firmware read fails
-      }
 
   /* USER CODE END Init */
 
@@ -108,7 +101,7 @@ int main(void)
   MX_GPIO_Init();
   MX_I2C2_Init();
   /* USER CODE BEGIN 2 */
-
+  app_init();
 
   /* USER CODE END 2 */
 
@@ -119,16 +112,15 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-	  if (!ags10_get_gas_resistance(&ags_sensor, &gas_resistance))
-	  {
-		  gas_resistance = 0xFFFFFFFF; // Indicate error
-	  }
+      if (!ags10_gas_resistance_get(&ags10, &gas_resistance))
+      {
+          gas_resistance = 0xFFFFFFFF;
+      }
 
-	  if (!ags10_get_tvoc(&ags_sensor, &tvoc))
-	  {
-		  tvoc = 0xFFFFFFFF; // Indicate error
-	  }
-
+      if (!ags10_tvoc_get(&ags10, &tvoc))
+      {
+          tvoc = 0xFFFFFFFF;
+      }
   }
   /* USER CODE END 3 */
 }
@@ -238,8 +230,27 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+bool AGS10_IO_Write(uint8_t addr, uint8_t *pData, uint16_t length) {
+    return HAL_I2C_Master_Transmit(&hi2c2, addr << 1, pData, length, 100) == HAL_OK;
+}
 
+bool AGS10_IO_Read(uint8_t addr, uint8_t *pData, uint16_t length) {
+    return HAL_I2C_Master_Receive(&hi2c2, addr << 1, pData, length, 100) == HAL_OK;
+}
 
+void AGS10_IO_Delay(uint16_t ms) {
+    HAL_Delay(ms);
+}
+
+void app_init(void) {
+    ags10_init(&ags10, AGS10MA_I2C_DEVICE_ADDR);
+
+    uint32_t version;
+    if (ags10_firmware_version_get(&ags10, &version)) {
+    } else {
+
+    }
+}
 /* USER CODE END 4 */
 
 /**

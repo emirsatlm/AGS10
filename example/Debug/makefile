@@ -1,6 +1,6 @@
 ################################################################################
 # Automatically-generated file. Do not edit!
-# Toolchain: GNU Tools for STM32 (12.3.rel1)
+# Toolchain: GNU Tools for STM32 (13.3.rel1)
 ################################################################################
 
 -include ../makefile.init
@@ -84,8 +84,8 @@ all: main-build
 main-build: gas_sensor.elf secondary-outputs
 
 # Tool invocations
-gas_sensor.elf gas_sensor.map: $(OBJS) $(USER_OBJS) C:\ST_Projects\AGS10\gas_sensor\STM32F103C8TX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-g++ -o "gas_sensor.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"C:\ST_Projects\AGS10\gas_sensor\STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="gas_sensor.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+gas_sensor.elf gas_sensor.map: $(OBJS) $(USER_OBJS) C:\Users\satil\Desktop\Projects\ST_Projects\AGS10\example\STM32F103C8TX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-g++ -o "gas_sensor.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"C:\Users\satil\Desktop\Projects\ST_Projects\AGS10\example\STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="gas_sensor.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

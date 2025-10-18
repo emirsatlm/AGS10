@@ -1,7 +1,7 @@
-../Core/Src/AGS10.c:8:9:ags10_crc8	32	static
-../Core/Src/AGS10.c:21:6:ags10_init	24	static
-../Core/Src/AGS10.c:27:6:ags10_read_register	40	static
-../Core/Src/AGS10.c:50:6:ags10_get_firmware_version	16	static
-../Core/Src/AGS10.c:54:6:ags10_get_gas_resistance	16	static
-../Core/Src/AGS10.c:63:6:ags10_get_tvoc	16	static
-../Core/Src/AGS10.c:72:6:ags10_set_address	32	static
+../Core/Src/AGS10.c:14:6:ags10_init	16	static
+../Core/Src/AGS10.c:21:6:ags10_register_read	32	static
+../Core/Src/AGS10.c:62:6:ags10_firmware_version_get	16	static
+../Core/Src/AGS10.c:68:6:ags10_gas_resistance_get	16	static
+../Core/Src/AGS10.c:87:6:ags10_tvoc_get	16	static
+../Core/Src/AGS10.c:104:6:ags10_address_set	24	static
+../Core/Src/AGS10.c:126:9:ags10_crc8	32	static
