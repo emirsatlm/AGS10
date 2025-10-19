@@ -1,8 +1,10 @@
-# AGS10 Gas Sensor Driver for STM32F1
+# AGS10 Gas Sensor Driver
 
 ## Overview
 
-driver for the AGS10 gas sensor using I2C on STM32F1. Supports gas resistance and TVOC readings with CRC validation and polling.
+This is a driver for the AGS10 TVOC (Total Volatile Organic Compounds) and gas sensor, which communicates over I2C. This driver handles register reading, data parsing, and CRC8 checksum validation.
+
+The driver is split into (`ags10.c`, `ags10.h`) and requires the user to implement the platform-specific I/O functions. An example for STM32F1 (using HAL) is provided in the `example` directory.
 
 ## Files
 * example
@@ -17,19 +19,7 @@ to adapt other enviroments
 
 # AGS10 TVOC & Gas Sensor Driver
 
-## Overview
 
-This is a platform-agnostic driver for the AGS10 TVOC (Total Volatile Organic Compounds) and gas sensor, which communicates over I2C. This driver handles register reading, data parsing, and CRC8 checksum validation.
-
-The driver is split into platform-agnostic logic (`ags10.c`, `ags10.h`) and requires the user to implement the platform-specific I/O functions. An example for STM32F1 (using HAL) is provided in the `gas_Sensor` directory.
-
-## Features
-
-* Read TVOC (Total Volatile Organic Compounds) levels in ppb (parts-per-billion).
-* Read sensor's internal gas resistance in Ohms.
-* Read the sensor's firmware version.
-* Change the sensor's I2C address.
-* Automatic CRC8 checksum verification for all I2C read operations to ensure data integrity.
 
 ## Hardware Dependencies
 
