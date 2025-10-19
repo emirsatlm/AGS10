@@ -44,7 +44,6 @@ AGS10_HandleTypeDef ags10;
 I2C_HandleTypeDef hi2c2;
 
 /* USER CODE BEGIN PV */
-uint32_t gas_resistance = 0;
 uint32_t tvoc = 0;
 uint32_t firmware_version = 0;
 uint8_t sensor_initialized = 0;
@@ -112,11 +111,6 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-      if (!ags10_gas_resistance_get(&ags10, &gas_resistance))
-      {
-          gas_resistance = 0xFFFFFFFF;
-      }
-
       if (!ags10_tvoc_get(&ags10, &tvoc))
       {
           tvoc = 0xFFFFFFFF;

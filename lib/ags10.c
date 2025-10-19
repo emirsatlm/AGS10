@@ -68,25 +68,6 @@ bool ags10_firmware_version_get(AGS10_HandleTypeDef *ph_sensor,
     return ags10_register_read(ph_sensor, AGS10MA_VERSION_REG, 30, p_version);
 }
 
-bool ags10_gas_resistance_get(AGS10_HandleTypeDef *ph_sensor, 
-                              uint32_t *p_resistance)
-{
-    if (false == ags10_register_read(ph_sensor, 
-                                     AGS10MA_GAS_RES_REG, 
-                                     1000, 
-                                     p_resistance)) 
-    {
-        #define FAIL_VAL 0xFFFFFFFF
-        *p_resistance = FAIL_VAL;
-        #undef FAIL_VAL
-        return false;
-    }
-
-    *p_resistance *= 100;
-    
-    return true;
-}
-
 bool ags10_tvoc_get(AGS10_HandleTypeDef *ph_sensor, uint32_t *p_tvoc) 
 {
     if (false == ags10_register_read(ph_sensor, 

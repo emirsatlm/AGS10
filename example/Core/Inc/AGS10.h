@@ -126,20 +126,6 @@ bool ags10_register_read(AGS10_HandleTypeDef *ph_sensor,
 bool ags10_firmware_version_get(AGS10_HandleTypeDef *ph_sensor, 
                                 uint32_t *p_version);
 
-                                /**
- * @brief Get the gas resistance value from the AGS10 sensor.
- * 
- * Retrieves the current gas resistance measured by the AGS10 sensor.
- * 
- * @param[in] ph_sensor Pointer to the sensor handle structure.
- * @param[out] p_resistance Pointer to store the gas resistance value (in ohms).
- * 
- * @retval true  Resistance read successfully.
- * @retval false Failed to read resistance or invalid arguments.
- */
-bool ags10_gas_resistance_get(AGS10_HandleTypeDef *ph_sensor, 
-                              uint32_t *p_resistance);
-
 /**
  * @brief Get the Total Volatile Organic Compounds (TVOC) value.
  * 
