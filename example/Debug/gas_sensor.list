@@ -37,11 +37,11 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING, OCTETS
  16 .debug_macro  00015f12  00000000  00000000  0000bf78  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_line   00008ca9  00000000  00000000  00021e8a  2**0
+ 17 .debug_line   00008caa  00000000  00000000  00021e8a  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_str    0007e847  00000000  00000000  0002ab33  2**0
+ 18 .debug_str    0007e847  00000000  00000000  0002ab34  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .comment      00000043  00000000  00000000  000a937a  2**0
+ 19 .comment      00000043  00000000  00000000  000a937b  2**0
                   CONTENTS, READONLY
  20 .debug_frame  00001bb8  00000000  00000000  000a93c0  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
@@ -79,8 +79,8 @@ Disassembly of section .text:
  8000148:	0800264c 	.word	0x0800264c
 
 0800014c <ags10_init>:
- */
-#include "AGS10.h"
+* Public Function Definitions
+ ******************************************************************************/
 
 bool ags10_init(AGS10_HandleTypeDef *ph_sensor, 
                 uint8_t i2c_addr) 

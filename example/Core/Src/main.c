@@ -21,7 +21,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "AGS10.h"
+#include "ags10.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/

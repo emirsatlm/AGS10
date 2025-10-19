@@ -1,2 +1,2 @@
-Core/Src/AGS10.o: ../Core/Src/AGS10.c ../Core/Inc/AGS10.h
-../Core/Inc/AGS10.h:
+Core/Src/ags10.o: ../Core/Src/ags10.c ../Core/Inc/ags10.h
+../Core/Inc/ags10.h:

@@ -1,15 +1,18 @@
-// todo: use doxgen style brief
 /**
  * @file ags10.c
  * @author emirsatlm (emir@satlm.dev)
  * @brief
  * @version 0.3
- * @date 2025-09-01
+ * @date 2025-19-10
  *
  * @copyright Copyright (c) 2025
  *
  */
-#include "AGS10.h"
+#include "ags10.h"
+
+/*******************************************************************************
+* Public Function Definitions
+ ******************************************************************************/
 
 bool ags10_init(AGS10_HandleTypeDef *ph_sensor, 
                 uint8_t i2c_addr) 
@@ -140,3 +143,4 @@ uint8_t ags10_crc8(const uint8_t *p_data, int len)
 
     return crc;
 }
+// eof
